@@ -4,9 +4,11 @@ package com.example.navigasiku.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.*
+import androidx.compose.material3.DividerDefaults.Thickness
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +51,21 @@ fun FormIsian(
                 label = {Text(text = "Nama Lengkap")},
                 onValueChange = {}
             )
+            HorizontalDivider(modifier = Modifier
+                .padding(all = 20.dp)
+                .width(width = 250.dp), thickness = Thickness, color =Color.Red)
+            Row {
+                jenisK.forEach {
+                    item->
+                    Row (verticalAlignment = Alignment.CenterHorizontally){
+                        RadioButton(
+                            selected = false,
+                            onClick = {item}
+                        )
+                        Text(text = item)
+                    }
+                }
+            }
         }
 
     }
