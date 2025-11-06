@@ -8,6 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.navigasiku.view.FormIsian
+import com.example.navigasiku.view.TampilData
 
 enum class Navigasi {
     Formulir,
@@ -25,29 +27,33 @@ fun DataApp(
             startDestination = Navigasi.Formulir.name,
             modifier = Modifier.padding(isiRuang)
         ) {
+            // 🔹 Halaman Formulir
             composable(route = Navigasi.Formulir.name) {
                 FormIsian(
-                    // contoh: pilihanJK = jenisK.map { id -> context.resources.getString(id) },
-                    OnSubmitBtnClick = {
-                        navController.navigate(route = Navigasi.Detail.name)
+                    onSubmitBtnClick = {
+                        navController.navigate(Navigasi.Detail.name)
                     }
                 )
             }
+
+            // 🔹 Halaman Detail (Tampil Data)
             composable(route = Navigasi.Detail.name) {
-                TampilanData(
-                    onBackBtnClick = {cancelAndBackToFormulir(navController) }
+                TampilData(
+                    onBackBtnClick = {
+                        cancelAndBackToFormulir(navController)
+                    }
                 )
             }
         }
     }
 }
 
+// 🔹 Fungsi kembali ke Formulir tanpa menghapus stack-nya
 private fun cancelAndBackToFormulir(
     navController: NavHostController
-){
-    navController.popBackStack(route = Navigasi.Formulir.name, inclusive = false)
+) {
+    navController.popBackStack(
+        route = Navigasi.Formulir.name,
+        inclusive = false
+    )
 }
-
-
-
-
